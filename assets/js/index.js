@@ -48,4 +48,30 @@ const propiedadesJSON = [
       metros: 500
     }
   ];
+
+let seccionPropiedades = document.getElementById("Propiedades");
+let input_metrosDesde = document.getElementById("input_metrosDesde");
+let input_metrosHasta = document.getElementById("input_metrosHasta");
+let input_cantCuartos = document.getElementById("input_cantCuartos");
+let btnBuscar = document.getElementById("btnBuscar");
+
+seccionPropiedades += `<h4 class="py-3">Total: <span>${propiedadesJSON.length}</span></h4>`
+for(let propiedad of propiedadesJSON){
+  seccionPropiedades += `<div class="propiedades">`;
+  seccionPropiedades += ` <div class="propiedad">`;
+  seccionPropiedades += `   <div class="img" style="background-image: url('${propiedad.src}')"></div>`;
+  seccionPropiedades += `   <section>`;
+  seccionPropiedades += `     <h5>${propiedad.nombre}</h5>`;
+  seccionPropiedades += `     <div class="d-flex justify-content-between">`;
+  seccionPropiedades += `       <p>Cuartos: ${propiedad.cuartos}</p>`;
+  seccionPropiedades += `       <p>Metros: ${propiedad.metros}</p>`;
+  seccionPropiedades += `     </div>`;
+  seccionPropiedades += `   <section>`;
+
+
   
+}
+
+function despliegueData(){
+
+} 
