@@ -50,28 +50,45 @@ const propiedadesJSON = [
   ];
 
 let seccionPropiedades = document.getElementById("Propiedades");
-let input_metrosDesde = document.getElementById("input_metrosDesde");
-let input_metrosHasta = document.getElementById("input_metrosHasta");
-let input_cantCuartos = document.getElementById("input_cantCuartos");
+
 let btnBuscar = document.getElementById("btnBuscar");
+let dataResultado;
+let metrosDesde;
+let metrosHasta;
+let cantCuartos;
+despliegueData(propiedadesJSON);
+function Buscar(){
+  metrosDesde = document.getElementById("input_metrosDesde").value;
+  metrosHasta = document.getElementById("input_metrosHasta").value;
+  cantCuartos = document.getElementById("input_cantCuartos").value;
 
-seccionPropiedades += `<h4 class="py-3">Total: <span>${propiedadesJSON.length}</span></h4>`
-for(let propiedad of propiedadesJSON){
-  seccionPropiedades += `<div class="propiedades">`;
-  seccionPropiedades += ` <div class="propiedad">`;
-  seccionPropiedades += `   <div class="img" style="background-image: url('${propiedad.src}')"></div>`;
-  seccionPropiedades += `   <section>`;
-  seccionPropiedades += `     <h5>${propiedad.nombre}</h5>`;
-  seccionPropiedades += `     <div class="d-flex justify-content-between">`;
-  seccionPropiedades += `       <p>Cuartos: ${propiedad.cuartos}</p>`;
-  seccionPropiedades += `       <p>Metros: ${propiedad.metros}</p>`;
-  seccionPropiedades += `     </div>`;
-  seccionPropiedades += `   <section>`;
+  if(metrosDesde==""&&metrosHasta==""&&cantCuartos==""){
+    alert("Ingrese valores");
+  }
+  else{
+    dataResultado = propiedadesJSON.find(propiedad => propiedad.cuartos = cantCuartos && propiedad.metros >= metrosDesde && propiedad.metros <= metrosHasta);
+    
+    despliegueData(dataResultado);
+  }
 
-
-  
 }
-
-function despliegueData(){
-
+function despliegueData(propiedadesJSON){
+  let data = "";
+  data += `<h4 class="py-3">Total: <span>${propiedadesJSON.length}</span></h4>`
+ for(let propiedad of propiedadesJSON){
+   data += `<div class="propiedades">`;
+   data += ` <div class="propiedad">`;
+   data += `   <div class="img" style="background-image: url('${propiedad.src}')"></div>`;
+   data += `   <section>`;
+   data += `     <h5>${propiedad.nombre}</h5>`;
+   data += `     <div class="d-flex justify-content-between">`;
+   data += `       <p>Cuartos: ${propiedad.cuartos}</p>`;
+   data += `       <p>Metros: ${propiedad.metros}</p>`;
+   data += `     </div>`;
+   data += `     <p class="my-3">${propiedad.descripcion}</p>`;
+   data += `     <button class="btn btn-info ">Ver más</button>`;
+   data += `   </section>`;
+   data += `  </div>`;
+ }
+ seccionPropiedades.innerHTML = data;
 } 
