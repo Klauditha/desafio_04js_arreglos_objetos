@@ -60,8 +60,6 @@ let metrosHasta;
 let cantCuartos;
 let valido=true;
 
-
-
 const SetearError = (msg) => {
   return `<div class="alert alert-danger alert-dismissible" role="alert">${msg}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
 }
@@ -83,13 +81,14 @@ const DespliegueData = (propiedadesJSON) => {
    data += `       <p>Metros: ${propiedad.metros}</p>`;
    data += `     </div>`;
    data += `     <p class="my-3">${propiedad.descripcion}</p>`;
-   data += `     <button class="btn btn-info ">Ver más</button>`;
+   data += `     <button class="btn">Ver más</button>`;
    data += `   </section>`;
    data += `  </div>`;
  }
  data += `</div>`
  seccionPropiedades.innerHTML = data;
 }
+
 const Limpiar = () => {
   document.getElementById("input_metrosDesde").value = "";
   document.getElementById("input_metrosHasta").value = "";
@@ -98,6 +97,7 @@ const Limpiar = () => {
   errores = document.getElementById('errores');
   errores.innerHTML ="";
 }
+
 const Buscar = () => {
   metrosDesde = document.getElementById("input_metrosDesde").value;
   metrosHasta = document.getElementById("input_metrosHasta").value;

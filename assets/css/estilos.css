@@ -3,7 +3,7 @@
 }
 
 body{
-    background: #4e4d4d;
+    background: #ebb470;
     color: white;
     display: grid;
     grid-template-columns: 3fr 10fr;
@@ -11,7 +11,8 @@ body{
 }
 
 nav{
-    padding: 20px 15%; 
+    background: #b97420;
+    padding: 20px 15%;
     border-right: solid 1px white;
     height:100vh
 }
@@ -26,29 +27,44 @@ nav div{
     margin-bottom: 20px;
 }
 
-
 /* Propiedades */
-
 .propiedades {
     padding: 0px 5%;
     display:grid;
     grid-template-columns: repeat(4, 1fr);    
     gap: 45px
 }
+
 .propiedad{
     margin: auto;
-    background: rgba(255, 255, 255, 0.068);
     box-shadow: 0px 0px 7px 1px rgba(255, 255, 255, 0.39);
+    background: #725531;
+    border-radius: 10px ;
 }
+
 .propiedad .img{
     height: 150px;
     background-size: cover;
     background-position: center;
+    border-radius: 10px;
 }
+
 .propiedad section{
     padding: 10px 20px;
 }
 
 .propiedad section p{
     margin: 0px
+}
+
+.btn-info{
+    background-color:#f1921d;
+    color: black;
+    border: black;
+}
+
+.btn-info:hover, .btn-info:focus, .btn-info:active{
+    background-color:#9b2525;
+    color:white;
+    border: white;
 }
