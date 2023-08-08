@@ -61,54 +61,9 @@ let cantCuartos;
 let valido=true;
 
 
-const Limpiar = () => {
-  document.getElementById("input_metrosDesde").value = "";
-  document.getElementById("input_metrosHasta").value = "";
-  document.getElementById("input_cantCuartos").value = "";
-  DespliegueData(propiedadesJSON);
-  errores = document.getElementById('errores');
-  errores.innerHTML ="";
-}
+
 const SetearError = (msg) => {
   return `<div class="alert alert-danger alert-dismissible" role="alert">${msg}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
-}
-
-const Buscar = () => {
-  metrosDesde = document.getElementById("input_metrosDesde").value;
-  metrosHasta = document.getElementById("input_metrosHasta").value;
-  cantCuartos = document.getElementById("input_cantCuartos").value;
-  wrapper = document.createElement('div');
-  errores = document.getElementById('errores');
-  errores.innerHTML ="";
-  valido=true;
-
-  if(cantCuartos==""){
-    wrapper.innerHTML += SetearError('Cantidad de cuartos es requerido');
-    valido = false;
-  }
-  if(metrosDesde==""){
-    wrapper.innerHTML += SetearError('Metros desde es requerido');
-    valido = false;
-  }
-  if(metrosHasta==""){
-    wrapper.innerHTML += SetearError('Metros hasta es requerido');
-    valido = false;
-  }
-  if(metrosHasta!="" && metrosDesde!="" && metrosHasta < metrosDesde){
-    wrapper.innerHTML += SetearError('Metros desde debe ser mayor o igual a Metros hasta');
-    valido = false;
-  }
-  if(cantCuartos>0 ||metrosHasta>0 || metrosDesde>0){
-    wrapper.innerHTML += SetearError('Los valores ingresados deben ser positivos');
-    valido = false;
-  }
-  errores.append(wrapper);
-
-  if(valido){
-      despliegueData(propiedadesJSON.filter(propiedad => propiedad.cuartos == cantCuartos
-                      && propiedad.metros >= metrosDesde
-                      && propiedad.metros <= metrosHasta));
-  }
 }
 
 const DespliegueData = (propiedadesJSON) => {
@@ -134,6 +89,51 @@ const DespliegueData = (propiedadesJSON) => {
  }
  data += `</div>`
  seccionPropiedades.innerHTML = data;
+}
+const Limpiar = () => {
+  document.getElementById("input_metrosDesde").value = "";
+  document.getElementById("input_metrosHasta").value = "";
+  document.getElementById("input_cantCuartos").value = "";
+  DespliegueData(propiedadesJSON);
+  errores = document.getElementById('errores');
+  errores.innerHTML ="";
+}
+const Buscar = () => {
+  metrosDesde = document.getElementById("input_metrosDesde").value;
+  metrosHasta = document.getElementById("input_metrosHasta").value;
+  cantCuartos = document.getElementById("input_cantCuartos").value;
+  wrapper = document.createElement('div');
+  errores = document.getElementById('errores');
+  errores.innerHTML ="";
+  valido=true;
+
+  if(cantCuartos==""){
+    wrapper.innerHTML += SetearError('Cantidad de cuartos es requerido');
+    valido = false;
+  }
+  if(metrosDesde==""){
+    wrapper.innerHTML += SetearError('Metros desde es requerido');
+    valido = false;
+  }
+  if(metrosHasta==""){
+    wrapper.innerHTML += SetearError('Metros hasta es requerido');
+    valido = false;
+  }
+  if(metrosHasta!="" && metrosDesde!="" && metrosHasta < metrosDesde){
+    wrapper.innerHTML += SetearError('Metros desde debe ser mayor o igual a Metros hasta');
+    valido = false;
+  }
+  if(cantCuartos<0 ||metrosHasta<0 || metrosDesde<0){
+    wrapper.innerHTML += SetearError('Los valores ingresados deben ser positivos');
+    valido = false;
+  }
+  errores.append(wrapper);
+
+  if(valido){
+      DespliegueData(propiedadesJSON.filter(propiedad => propiedad.cuartos <= cantCuartos
+                      && propiedad.metros >= metrosDesde
+                      && propiedad.metros <= metrosHasta));
+  }
 }
 
 DespliegueData(propiedadesJSON);
