@@ -32,10 +32,10 @@ nav div{
 .propiedades {
     padding: 0px 5%;
     display:grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);    
     gap: 45px
 }
-.propiedad{ 
+.propiedad{
     margin: auto;
     background: rgba(255, 255, 255, 0.068);
     box-shadow: 0px 0px 7px 1px rgba(255, 255, 255, 0.39);

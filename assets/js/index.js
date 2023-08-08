@@ -50,33 +50,46 @@ const propiedadesJSON = [
   ];
 
 let seccionPropiedades = document.getElementById("Propiedades");
-
-let btnBuscar = document.getElementById("btnBuscar");
 let dataResultado;
 let metrosDesde;
 let metrosHasta;
 let cantCuartos;
-despliegueData(propiedadesJSON);
-function Buscar(){
+
+const Buscar = () => {
   metrosDesde = document.getElementById("input_metrosDesde").value;
   metrosHasta = document.getElementById("input_metrosHasta").value;
   cantCuartos = document.getElementById("input_cantCuartos").value;
-
-  if(metrosDesde==""&&metrosHasta==""&&cantCuartos==""){
-    alert("Ingrese valores");
-  }
-  else{
-    dataResultado = propiedadesJSON.find(propiedad => propiedad.cuartos = cantCuartos && propiedad.metros >= metrosDesde && propiedad.metros <= metrosHasta);
+  let wrapper = document.createElement('div');
+  
+  let errores = document.getElementById('errores');
+  errores.innerHTML ="";
+  if(cantCuartos==""){
+    wrapper.innerHTML += '<div class="alert alert-danger alert-dismissible" role="alert">' + "Cantidad de cuartos es requerido" + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     
-    despliegueData(dataResultado);
   }
-
+  if(metrosDesde==""){
+    wrapper.innerHTML += '<div class="alert alert-danger alert-dismissible" role="alert">' + "Metros desde es requerido" + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+    
+  }
+  if(metrosHasta==""){
+    wrapper.innerHTML += '<div class="alert alert-danger alert-dismissible" role="alert">' + "Metros hasta es requerido" + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+    
+  }errores.append(wrapper);
+  if(cantCuartos!=""&&metrosDesde!=""&&metrosHasta!=""){
+      despliegueData(propiedadesJSON.filter(propiedad => propiedad.cuartos == cantCuartos
+                      && propiedad.metros >= metrosDesde
+                      && propiedad.metros <= metrosHasta));
+  }
 }
-function despliegueData(propiedadesJSON){
+
+const despliegueData = (propiedadesJSON) => {
   let data = "";
-  data += `<h4 class="py-3">Total: <span>${propiedadesJSON.length}</span></h4>`
+  if(propiedadesJSON.length>0)
+    data += `<h4 class="py-3">Total: <span>${propiedadesJSON.length}</span></h4>`;
+  else
+    data += `<h4 class="py-3">Total: <span>Busqueda sin resultados</span></h4>`;
+  data += `<div class="propiedades">`;
  for(let propiedad of propiedadesJSON){
-   data += `<div class="propiedades">`;
    data += ` <div class="propiedad">`;
    data += `   <div class="img" style="background-image: url('${propiedad.src}')"></div>`;
    data += `   <section>`;
@@ -90,5 +103,8 @@ function despliegueData(propiedadesJSON){
    data += `   </section>`;
    data += `  </div>`;
  }
+ data += `</div>`
  seccionPropiedades.innerHTML = data;
-} 
+}
+
+despliegueData(propiedadesJSON);
