@@ -120,7 +120,7 @@ const Buscar = () => {
     valido = false;
   }
   if(metrosHasta!="" && metrosDesde!="" && metrosHasta < metrosDesde){
-    wrapper.innerHTML += SetearError('Metros desde debe ser mayor o igual a Metros hasta');
+    wrapper.innerHTML += SetearError('Metros desde debe ser menor o igual a Metros hasta');
     valido = false;
   }
   if(cantCuartos<0 ||metrosHasta<0 || metrosDesde<0){
@@ -130,7 +130,7 @@ const Buscar = () => {
   errores.append(wrapper);
 
   if(valido){
-      DespliegueData(propiedadesJSON.filter(propiedad => propiedad.cuartos <= cantCuartos
+      DespliegueData(propiedadesJSON.filter(propiedad =>  propiedad.cuartos >= cantCuartos
                       && propiedad.metros >= metrosDesde
                       && propiedad.metros <= metrosHasta));
   }
